@@ -7,7 +7,7 @@ import { auth } from './firebase';
 
 function App() {
   const [user, setUser] = useState(null);
-
+ 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);

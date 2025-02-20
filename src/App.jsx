@@ -7,14 +7,17 @@ import { auth } from './firebase';
 
 function App() {
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
+    setLoading(true)
     onAuthStateChanged(auth, (user) => {
       setUser(user);
+    setLoading(false)
+
     });
   }, []);
 
-  return <div>{user ? <ChatRoom /> : <Auth />}</div>;
+  return <div>{loading ? <>Loading</>: user ? <ChatRoom /> : <Auth />}</div>;
 }
 
 export default App

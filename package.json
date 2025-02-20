@@ -13,9 +13,13 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.5",
+    "antd": "^5.24.1",
+    "date-fns": "^4.1.0",
+    "emoji-picker-react": "^4.12.0",
     "firebase": "^11.3.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-shimmer-effects": "^1.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

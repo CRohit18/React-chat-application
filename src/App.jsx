@@ -12,12 +12,11 @@ function App() {
     setLoading(true)
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-    setLoading(false)
+      setLoading(false)
 
     });
   }, []);
-
-  return <div>{loading ? <>Loading</>: user ? <ChatRoom /> : <Auth />}</div>;
+  return <div>{loading ? <>Loading</> : user ? <ChatRoom /> : <Auth />}</div>;
 }
 
 export default App

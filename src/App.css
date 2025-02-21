@@ -89,8 +89,7 @@
 }
 
 .auth-input {
-  width: 80%;
-  padding: 15px 40px 15px 20px;
+  padding: 15px 20px 15px 20px;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   font-size: 1rem;
@@ -234,7 +233,6 @@
   height: 100vh;
   margin: 0 auto;
   background: #f0f2f5;
-  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -247,6 +245,7 @@
   font-size: 1.2rem;
   font-weight: 500;
   z-index: 1075;
+  height: 80px;
 }
 
 .chat-messages {
@@ -366,10 +365,18 @@
   height: 400px !important;
   right: 80px !important;
 }
-.epr-header{
-  display: none; 
+
+.epr-header {
+  display: none;
 }
 
-.epr_-3yva2a{
+.epr_-3yva2a {
   display: none !important;
+}
+
+.logout-btn {
+  position: relative;
+  left: 45%;
+  bottom: 90%;
+  border-radius: 50px;
 }

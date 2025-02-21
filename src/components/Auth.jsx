@@ -1,12 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
+import { routeConstants } from "../routes/routeConstant";
 
 export default function Auth() {
   const [messageApi, contextHolder] = message.useMessage();
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const isCreatePage = useMemo(() => location?.pathname.startsWith(routeConstants.create), [location?.pathname])
+  const isLoginPage = useMemo(() => location?.pathname.startsWith(routeConstants.login), [location?.pathname])
+
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -18,6 +26,20 @@ export default function Auth() {
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  //Logic between login and logout page 
+  const handleCreate = () => {
+    if (isLoginPage) {
+      askForPassword("2325", function () {
+        window.alert("User authenticated successfully!");
+        navigate(routeConstants.create)
+        // Perform any action after successful validation
+      });
+
+    } else if (isCreatePage) {
+      signUp()
+    }
+  }
 
   // Sign Up Function (With Display Name)
   const signUp = useCallback(async () => {
@@ -51,6 +73,38 @@ export default function Auth() {
     }
   }, [formData]);
 
+  const askForPassword = (correctPassword, onSuccess) => {
+    let attempts = 1;
+    while (attempts > 0) {
+      const password = window.prompt("Enter your password:");
+      if (!password) {
+        alert("Cancelled or empty input.")
+      };
+
+      if (password === correctPassword) {
+        alert("Access Granted!");
+        onSuccess(); // Call success function
+        return;
+      } else {
+        attempts--;
+        alert(`Incorrect password. ${attempts} attempts remaining.`);
+      }
+    }
+    navigate(routeConstants.login)
+    alert("Too many failed attempts. Access Denied!");
+  }
+
+  useEffect(() => {
+    if (isCreatePage) {
+      askForPassword("2325", function () {
+        window.alert("User authenticated successfully!");
+        navigate(routeConstants.login)
+
+        // Perform any action after successful validation
+      });
+    }
+  }, [])
+
   return (
     <>
       {contextHolder}
@@ -62,13 +116,13 @@ export default function Auth() {
           </div>
 
           {/* Display Name Input */}
-          <InputField
+          {isCreatePage && <InputField
             type="text"
             name="displayName"
             label="Display Name"
             value={formData.displayName}
             onChange={handleChange}
-          />
+          />}
 
           {/* Email Input */}
           <InputField
@@ -90,12 +144,24 @@ export default function Auth() {
 
           {/* Authentication Buttons */}
           <div className="auth-actions">
-            <button className="auth-btn signin-btn" onClick={signIn}>
-              Sign In
-            </button>
-            <button className="auth-btn signup-btn" onClick={signUp}>
+            {isLoginPage &&
+              <button className="auth-btn signin-btn" onClick={signIn}>
+                Sign In
+              </button>
+            }
+            <button className="auth-btn signup-btn"
+              onClick={() => handleCreate()}
+            >
               Create Account
             </button>
+            {isCreatePage &&
+              <button className="auth-btn signup-btn"
+                onClick={() => navigate(routeConstants.login)}
+              >
+                Back to login
+              </button>
+            }
+
           </div>
         </div>
       </div>

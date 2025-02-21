@@ -289,11 +289,12 @@
 }
 
 .message-timestamp {
-  display: block;
+  display: flex;
   font-size: 0.7rem;
   color: #666;
   margin-top: 4px;
   text-align: right;
+  align-items: baseline;
 }
 
 .chat-input-area {

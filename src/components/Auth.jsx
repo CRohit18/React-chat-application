@@ -1,9 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useCallback } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
+import { message } from "antd";
 
 export default function Auth() {
+  const [messageApi, contextHolder] = message.useMessage();
+
   const [formData, setFormData] = useState({
     displayName: "",
     email: "",
@@ -19,17 +23,16 @@ export default function Auth() {
   const signUp = useCallback(async () => {
     const { email, password, displayName } = formData;
     if (!displayName || !email || !password) {
-      alert("All fields are required!");
+      messageApi.error("All fields are required !");
       return;
     }
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName });
-
-      alert(`Account created! Welcome, ${displayName}`);
+      messageApi.success(`Account created! Welcome, ${displayName}`)
     } catch (error) {
-      alert(error.message);
+      messageApi.error(error.message);
     }
   }, [formData]);
 
@@ -37,64 +40,66 @@ export default function Auth() {
   const signIn = useCallback(async () => {
     const { email, password } = formData;
     if (!email || !password) {
-      alert("Email and password are required!");
+      messageApi.error("Email and password are required !");
       return;
     }
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Signed in successfully!");
+      messageApi.success("Signed in successfully !");
     } catch (error) {
-      alert(error.message);
+      messageApi.error("Invalid credentials !");
     }
   }, [formData]);
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <div className="auth-header">
-          <h2>Welcome! 👋</h2>
-          <p>Sign up or Sign in to continue</p>
-        </div>
+    <>
+      {contextHolder}
+      <div className="auth-container">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h2>Welcome! 👋</h2>
+            <p>Sign up or Sign in to continue</p>
+          </div>
 
-        {/* Display Name Input */}
-        <InputField
-          type="text"
-          name="displayName"
-          label="Display Name"
-          value={formData.displayName}
-          onChange={handleChange}
-        />
+          {/* Display Name Input */}
+          <InputField
+            type="text"
+            name="displayName"
+            label="Display Name"
+            value={formData.displayName}
+            onChange={handleChange}
+          />
 
-        {/* Email Input */}
-        <InputField
-          type="email"
-          name="email"
-          label="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+          {/* Email Input */}
+          <InputField
+            type="email"
+            name="email"
+            label="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
-        {/* Password Input */}
-        <InputField
-          type="password"
-          name="password"
-          label="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+          {/* Password Input */}
+          <InputField
+            type="password"
+            name="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
-        {/* Authentication Buttons */}
-        <div className="auth-actions">
-          <button className="auth-btn signin-btn" onClick={signIn}>
-            Sign In
-          </button>
-          <button className="auth-btn signup-btn" onClick={signUp}>
-            Create Account
-          </button>
+          {/* Authentication Buttons */}
+          <div className="auth-actions">
+            <button className="auth-btn signin-btn" onClick={signIn}>
+              Sign In
+            </button>
+            <button className="auth-btn signup-btn" onClick={signUp}>
+              Create Account
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

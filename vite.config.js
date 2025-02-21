@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
       },
       port: 3000,
       host: true, // Allows external access for testing on multiple devices
+      
     },
     
     // Module Resolution
@@ -48,5 +49,6 @@ export default defineConfig(({ mode }) => {
       chunkSizeWarningLimit: 1600, // Custom chunk size limit warning
       sourcemap: mode !== 'production', // Enable sourcemaps only for non-prod builds
     },
+   
   };
 });

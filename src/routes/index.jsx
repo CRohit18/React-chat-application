@@ -1,4 +1,4 @@
-import { Navigate, Routes as Router, Route, HashRouter } from "react-router-dom";
+import { Navigate, Routes as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -15,7 +15,7 @@ const Routes = () => {
     }, []);
 
     return (
-        <HashRouter>
+        
         <Router>
             {user ? (
                 <>
@@ -30,7 +30,6 @@ const Routes = () => {
                 </>
             )}
         </Router>
-        </HashRouter>
     );
 };
 

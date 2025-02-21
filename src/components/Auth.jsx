@@ -98,8 +98,6 @@ export default function Auth() {
     if (isCreatePage) {
       askForPassword("2325", function () {
         window.alert("User authenticated successfully!");
-        navigate(routeConstants.login)
-
         // Perform any action after successful validation
       });
     }

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build:dev": "GENERATE_SOURCEMAP=false vite build --mode development",
+    "build:uat": "GENERATE_SOURCEMAP=false vite build --mode uat",
+    "build:prod": "GENERATE_SOURCEMAP=false vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview"
   },

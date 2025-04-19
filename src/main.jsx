@@ -1,13 +1,13 @@
+import ReactDOMClient from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Optional: For Bootstrap JS features
+import App from "./App";
+import "@/assets/scss/style.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
-
-createRoot(document.getElementById('root')).render(
+ReactDOMClient.createRoot(document.querySelector("#root")).render(
   <BrowserRouter>
+    <ToastContainer />
     <App />
   </BrowserRouter>
-  )
+);

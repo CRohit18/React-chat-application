@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500;600;700;800&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: $color-black-100;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: $color-grey-100;
+}
+
+body::-webkit-scrollbar-track {
+  background: $color-grey-50;
+}

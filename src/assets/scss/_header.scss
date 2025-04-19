@@ -1,0 +1,139 @@
+@import "variables";
+@import "mixins";
+
+.header_block {
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  transition: background-color 0.3s ease;
+  .header_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .header_logo {
+    a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .header_right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header_themeToggle {
+    background: var(--card-background);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+  }
+
+  .profile_dropdown {
+    position: relative;
+    .profile_icon {
+      background: var(--card-background);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--custom-hover-primary);
+        color: white;
+      }
+    }
+
+    .dropdown_menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--card-background);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem 0;
+      min-width: 200px;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+
+      .dropdown_item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &.greeting {
+          font-weight: bold;
+          border-bottom: 1px solid var(--border-color);
+          margin-bottom: 0.5rem;
+          padding-bottom: 0.75rem;
+        }
+
+        &.logout {
+          cursor: pointer;
+          background: none;
+          border: none;
+          width: 100%;
+          text-align: left;
+
+          &:hover {
+            background: var(--primary-color);
+            color: white;
+
+            .logout_icon {
+              transform: translateX(5px);
+            }
+          }
+
+          .logout_icon {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+          }
+
+          .logout_text {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Fade-in animation for dropdown
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.notification-icon {
+  cursor: pointer;
+}

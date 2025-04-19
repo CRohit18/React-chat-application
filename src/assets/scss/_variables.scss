@@ -1,0 +1,44 @@
+$color-black-100: #091d37;
+$color-black-50: #69717a;
+$color-black: #000000;
+$color-primary: #aecf6d;
+$color-secondary: #334266;
+$color-grey-200: #71757a;
+$color-grey-100: #888e9a;
+$color-grey-90: #e6e8ec;
+$color-grey-80: #eff0f1;
+$color-grey-70: #f2f3f5;
+$color-grey-60: #f3f3f3;
+$color-grey-50: #eceef3;
+$color-green-10: #f5f8e9;
+$color-white: #ffffff;
+$color-red: red;
+
+:root {
+  // Light theme
+  --background-color: #f5f7fb;
+  --card-background: rgb(255 255 255);
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --primary-color: #854d0e;
+  --primary-hover: #337383;
+  --primary-bg-color: #cfedec;
+  --custom-hover-primary: #fffff;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --primary-rgb: 66, 153, 225;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-bg-opacity: 0.5 // Dark theme
+    &[data-theme= "dark"] {
+    --background-color: #1a202c;
+    --card-background: #2d3748;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --primary-color: #437582;
+    --primary-hover: #337383;
+    --border-color: #4a5568;
+    --input-background: #2d3748;
+  }
+}

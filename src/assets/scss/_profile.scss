@@ -1,0 +1,124 @@
+.update-profile {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f2f0f0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    &.image-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 1rem;
+
+      .profile-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      .edit-icon {
+        position: absolute;
+        bottom: 13px;
+        right: 13px;
+        z-index: 2;
+
+        .icon-btn {
+          background: #fff;
+          border: 1px solid #ccc;
+          border-radius: 50%;
+          padding: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      // border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+
+      &:focus {
+        // border-color: #007bff;
+      }
+
+      &.readonly {
+        background-color: #e2e2e2;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  }
+
+  .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    width: fit-content;
+    margin: auto;
+    &:hover,
+    &:focus {
+      background-color: #0056b3;
+    }
+  }
+}
+.change-password {
+  .password-toggle {
+    position: relative;
+    left: 96%;
+    bottom: 31px;
+  }
+}
+@media (max-width: 425px) {
+  .change-password {
+    .password-toggle {
+      left: 90%;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .change-password {
+    .password-toggle {
+      left: 85%;
+    }
+  }
+}

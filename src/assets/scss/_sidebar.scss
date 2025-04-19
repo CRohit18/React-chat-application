@@ -1,0 +1,119 @@
+.sidebar-container {
+  max-width: 260px;
+  min-width: 260px;
+  position: sticky;
+  width: 260px;
+  height: 100vh;
+  background-color: #f2f0f0;
+  color: white;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+}
+.sidebar-open {
+  display: block;
+  transform: translateX(0);
+}
+.sidebar-closed {
+  min-width: 70px !important;
+  max-width: 70px !important;
+  .trisita_logo {
+    margin-top: 15px;
+    img {
+      width: 70px;
+      height: 40px;
+    }
+  }
+  .menuItems_list {
+    ul {
+      padding-left: 0px;
+      li {
+        a {
+          justify-content: center;
+        }
+      }
+      h4 {
+        text-align: center;
+      }
+    }
+  }
+  .menu-item-text {
+    display: none;
+  }
+}
+.menuItems_list {
+  margin-top: 10px;
+  overflow-y: auto;
+  ul {
+    list-style: none;
+    h4 {
+      color: black;
+      font-size: 15px;
+    }
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: black;
+        margin: 0;
+        font-family: Source Sans Pro, sans-serif;
+        font-weight: 400;
+        font-size: 0.8571428571428571rem;
+        line-height: 1.5;
+        &:hover {
+          color: #6870fa;
+        }
+      }
+    }
+  }
+}
+.trisita_logo {
+  display: flex;
+  justify-content: center;
+  img {
+    height: 70px;
+    width: 155px;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar-container {
+    position: absolute;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    .menuItems_list {
+      margin-left: 20px;
+      ul {
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          a {
+          }
+        }
+        h4 {
+          text-align: start;
+        }
+      }
+    }
+  }
+  .menu-item-text {
+    display: flex !important;
+    justify-content: start;
+  }
+  .gr-close {
+    display: block !important;
+    color: black;
+    position: relative;
+    left: 15px;
+  }
+}
+.gr-close {
+  display: none;
+}
+.active-link {
+  color: #52d2c4 !important;
+  &:hover {
+    color: #52d2c4 !important;
+  }
+}

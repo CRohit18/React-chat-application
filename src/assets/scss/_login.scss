@@ -1,0 +1,120 @@
+@import "variables";
+@import "mixins";
+
+.login_container {
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease;
+
+  .loginBox {
+    background-color: #ffffff80;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    width: 100%;
+    max-width: 480px;
+    transition: all 0.3s ease;
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+
+      h1 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        text-decoration: underline;
+        font-weight: 600;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+    }
+
+    .formGroup {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.8rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        background: var(--input-background);
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+
+        &:focus {
+          border-color: var(--primary-color);
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+        }
+      }
+
+      .error {
+        color: rgba(255, 0, 0, 0.667);
+        margin-top: 3px;
+      }
+    }
+
+    .links {
+      margin-top: 1rem;
+      text-align: end;
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: var(--primary-hover);
+        }
+      }
+    }
+  }
+
+  .themeToggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--card-background);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+}
+.show_password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #007ec5;
+}
+.password-toggle {
+  position: relative;
+  left: 93%;
+  bottom: 36px;
+}
+.Password-error{
+  position: relative;
+  bottom: 25px;
+  left: 4px;
+}

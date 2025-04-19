@@ -1,108 +1,36 @@
-import { Suspense } from "react";
-import Layout from "@/layout";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
-import routesConfig from "./routes.config";
-import _404 from "@/components/common/_404";
-import routesConstants from "./routesConstants";
-import Loader from "@/components/common/loaders/Loader";
-import {
-  Route,
-  Routes as ReactRouterDomRoutes,
-  Navigate,
-} from "react-router-dom";
-
-const Common = (route) => (
-  <Suspense fallback={<Loader />}>
-    <route.component />
-  </Suspense>
-);
-
-Common.prototype = {
-  component: PropTypes.elementType.isRequired,
-};
-
-const Public = (route) => {
-  return (
-    <Suspense fallback={<Loader />}>
-      <route.component />
-    </Suspense>
-  );
-};
-
-Public.prototype = {
-  ...Common.prototype,
-};
-
-const Private = (route) => {
-  const { component: Component } = route;
-  return (
-    <Suspense fallback={<Loader />}>
-      <Component />
-    </Suspense>
-  );
-};
-
-Private.prototype = {
-  ...Common.prototype,
-};
-
-const createNestedRoutes = (routes, RouteType) => {
-  return routes.map((route, i) => {
-    if (!route.component) {
-      throw new Error("Component must be required....");
-    }
-    if (route.children) {
-      return (
-        <Route path={route.path} key={i} element={<RouteType {...route} />}>
-          {createNestedRoutes(route.children, RouteType)}
-        </Route>
-      );
-    } else {
-      return (
-        <Route
-          key={i}
-          index={route.index}
-          path={route.path}
-          element={<RouteType {...route} />}
-        />
-      );
-    }
-  });
-};
+import { Navigate, Routes as Router, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
+import ChatRoom from "../components/ChatRoom";
+import Auth from "../components/Auth";
+import { routeConstants } from "./routeConstant";
 
 const Routes = () => {
-  const { isAuth } = useSelector((state) => state.login);
-  const { common, private: privateRoutes, public: publicRoutes } = routesConfig;
-  return (
-    <ReactRouterDomRoutes>
-      {isAuth ? (
-        <>
-          <Route
-            index
-            path="/"
-            element={<Navigate to={routesConstants?.DASHBOARD} />}
-          />
-          <Route path="/" element={<Layout />}>
-            {createNestedRoutes(privateRoutes, Private)}
-          </Route>
-          <Route path="*" element={<_404 />} />
-        </>
-      ) : (
-        <>
-          <Route
-            index
-            path="/"
-            element={<Navigate to={routesConstants.LOGIN} />}
-          />
-          {createNestedRoutes(publicRoutes, Public)}
-          <Route path="*" element={<Navigate to={routesConstants.LOGIN} />} />
-        </>
-      )}
+    const [user, setUser] = useState(null);
 
-      {createNestedRoutes(common, Common)}
-    </ReactRouterDomRoutes>
-  );
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, setUser);
+        return () => unsubscribe(); // Cleanup on unmount
+    }, []);
+
+    return (
+        
+        <Router>
+            {user ? (
+                <>
+                    <Route path={routeConstants.chat} element={<ChatRoom />} />
+                    <Route path="*" element={<Navigate to={routeConstants.chat} />} />
+                </>
+            ) : (
+                <>
+                    <Route path={routeConstants.login} element={<Auth />} />
+                    <Route path={routeConstants.create} element={<Auth />} />
+                    <Route path="*" element={<Navigate to={routeConstants.login} />} />
+                </>
+            )}
+        </Router>
+    );
 };
 
 export default Routes;
